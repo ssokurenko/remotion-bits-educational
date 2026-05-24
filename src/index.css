@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+:root {
+  --tf-bg-0: #0b0820;
+  --tf-bg-1: #1a0f3a;
+  --tf-bg-2: #221153;
+  --tf-text: #f5f3ff;
+  --tf-text-dim: #c4b5fd;
+  --tf-accent: #8b5cf6;
+  --tf-accent-2: #22d3ee;
+  --tf-accent-3: #f472b6;
+  --tf-success: #4ade80;
+  --tf-error: #fb7185;
+  --tf-card: rgba(255, 255, 255, 0.05);
+  --tf-card-border: rgba(139, 92, 246, 0.25);
+}

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:type.fit)",
+      "Bash(npx remotion-bits *)",
+      "Bash(npx tsc *)",
+      "Bash(mkdir -p /tmp/typefit-stills)",
+      "Bash(npx remotion *)",
+      "Bash(bun add *)"
+    ]
+  }
+}
