@@ -23,26 +23,26 @@ export const PracticeScene: React.FC = () => {
   const frame = useCurrentFrame();
   const rect = useViewportRect();
 
-  const headerOpacity = interpolate(frame, [0, 18], [0, 1], {
+  const headerOpacity = interpolate(frame, [0, 36], [0, 1], {
     extrapolateRight: "clamp",
   });
-  const headerY = interpolate(frame, [0, 18], [16, 0], {
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
-
-  const cardOpacity = interpolate(frame, [8, 28], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-  const cardScale = interpolate(frame, [8, 28], [0.96, 1], {
-    extrapolateLeft: "clamp",
+  const headerY = interpolate(frame, [0, 36], [16, 0], {
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
 
-  const typeStart = 30;
-  const typeEnd = 170;
+  const cardOpacity = interpolate(frame, [16, 56], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const cardScale = interpolate(frame, [16, 56], [0.96, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.cubic),
+  });
+
+  const typeStart = 60;
+  const typeEnd = 340;
   const typedChars = Math.floor(
     interpolate(frame, [typeStart, typeEnd], [0, SAMPLE_QUOTE.length], {
       extrapolateLeft: "clamp",
@@ -53,11 +53,11 @@ export const PracticeScene: React.FC = () => {
   const typed = SAMPLE_QUOTE.slice(0, typedChars);
   const remaining = SAMPLE_QUOTE.slice(typedChars);
 
-  const cursorOn = Math.floor(frame / 9) % 2 === 0;
+  const cursorOn = Math.floor(frame / 18) % 2 === 0;
 
-  const statsStart = 40;
+  const statsStart = 80;
 
-  const exit = interpolate(frame, [195, 210], [1, 0], {
+  const exit = interpolate(frame, [390, 420], [1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -202,11 +202,12 @@ export const PracticeScene: React.FC = () => {
               display: "inline-block",
               width: 4,
               height: 56,
-              background: "#fff",
+              background: "#2b7fff",
               verticalAlign: "middle",
               marginLeft: 4,
               marginRight: 4,
               opacity: cursorOn ? 1 : 0,
+              boxShadow: "0 0 16px #2b7fff",
             }}
           />
           <span style={{ color: "#fff", opacity: 0.35 }}>
@@ -233,19 +234,19 @@ export const PracticeScene: React.FC = () => {
             target={98}
             suffix="%"
             color={COLORS.success}
-            startFrame={statsStart + 8}
+            startFrame={statsStart + 16}
           />
           <StatBox
             label="Streak"
             target={12}
             suffix=" days"
             color={COLORS.pink}
-            startFrame={statsStart + 16}
+            startFrame={statsStart + 32}
           />
         </div>
       </div>
 
-      <Sequence from={170}>
+      <Sequence from={340}>
         <Particles>
           <Spawner
             rate={0}
@@ -254,11 +255,11 @@ export const PracticeScene: React.FC = () => {
             area={{ width: rect.width * 0.4, height: 0 }}
             velocity={{
               x: 0,
-              y: -rect.height * 0.04,
-              varianceX: rect.width * 0.02,
-              varianceY: rect.height * 0.015,
+              y: -rect.height * 0.02,
+              varianceX: rect.width * 0.01,
+              varianceY: rect.height * 0.008,
             }}
-            lifespan={80}
+            lifespan={160}
             max={24}
           >
             {[COLORS.accent, COLORS.cyan, COLORS.pink, COLORS.success].map(
@@ -275,7 +276,7 @@ export const PracticeScene: React.FC = () => {
               ),
             )}
           </Spawner>
-          <Behavior gravity={{ y: 0.15 }} />
+          <Behavior gravity={{ y: 0.075 }} />
           <Behavior drag={0.985} />
           <Behavior opacity={[1, 0]} />
           <Behavior
@@ -299,11 +300,11 @@ const StatBox: React.FC<{
   const frame = useCurrentFrame();
   const local = frame - startFrame;
 
-  const opacity = interpolate(local, [0, 16], [0, 1], {
+  const opacity = interpolate(local, [0, 32], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const translateY = interpolate(local, [0, 16], [16, 0], {
+  const translateY = interpolate(local, [0, 32], [16, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
@@ -348,7 +349,7 @@ const StatBox: React.FC<{
           <AnimatedCounter
             transition={{
               values: [0, target],
-              duration: 50,
+              duration: 100,
               easing: "easeOutQuart",
             }}
             toFixed={0}

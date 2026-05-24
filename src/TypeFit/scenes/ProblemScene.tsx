@@ -12,7 +12,7 @@ export const ProblemScene: React.FC = () => {
   const frame = useCurrentFrame();
 
   const wpm = Math.floor(
-    interpolate(frame, [30, 130], [12, 38], {
+    interpolate(frame, [60, 260], [12, 38], {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
       easing: Easing.out(Easing.cubic),
@@ -21,16 +21,16 @@ export const ProblemScene: React.FC = () => {
 
   const sample = "The quick brown fox jumps...";
   const typedChars = Math.floor(
-    interpolate(frame, [40, 130], [0, sample.length], {
+    interpolate(frame, [80, 260], [0, sample.length], {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
     }),
   );
   const typed = sample.slice(0, typedChars);
 
-  const cursorOn = Math.floor(frame / 10) % 2 === 0;
+  const cursorOn = Math.floor(frame / 20) % 2 === 0;
 
-  const exit = interpolate(frame, [135, 150], [1, 0], {
+  const exit = interpolate(frame, [270, 300], [1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -59,8 +59,8 @@ export const ProblemScene: React.FC = () => {
             opacity: [0, 1],
             y: [12, 0],
             split: "word",
-            splitStagger: 3,
-            frames: [0, 20],
+            splitStagger: 6,
+            frames: [0, 40],
             easing: "easeOutCubic",
           }}
           style={{ fontFamily: FONT_SANS, color: "#000" }}
@@ -85,8 +85,8 @@ export const ProblemScene: React.FC = () => {
             y: [24, 0],
             blur: [8, 0],
             split: "word",
-            splitStagger: 2,
-            frames: [10, 38],
+            splitStagger: 4,
+            frames: [20, 76],
             easing: "easeOutCubic",
           }}
           style={{
@@ -114,7 +114,7 @@ export const ProblemScene: React.FC = () => {
             border: `1px solid ${COLORS.cardBorder}`,
             backdropFilter: "blur(20px)",
             minWidth: 720,
-            opacity: interpolate(frame, [25, 50], [0, 1], {
+            opacity: interpolate(frame, [50, 100], [0, 1], {
               extrapolateLeft: "clamp",
               extrapolateRight: "clamp",
             }),
@@ -134,11 +134,12 @@ export const ProblemScene: React.FC = () => {
                 display: "inline-block",
                 width: 4,
                 height: 36,
-                background: "#000",
+                background: "#2b7fff",
                 verticalAlign: "middle",
                 marginLeft: 4,
                 marginRight: 4,
                 opacity: cursorOn ? 1 : 0,
+                boxShadow: "0 0 12px #2b7fff",
               }}
             />
             <span style={{ color: "#000", opacity: 0.35 }}>
@@ -156,7 +157,7 @@ export const ProblemScene: React.FC = () => {
             borderRadius: 24,
             background: `linear-gradient(135deg, ${COLORS.error}22, ${COLORS.error}08)`,
             border: `1px solid ${COLORS.error}55`,
-            opacity: interpolate(frame, [40, 65], [0, 1], {
+            opacity: interpolate(frame, [80, 130], [0, 1], {
               extrapolateLeft: "clamp",
               extrapolateRight: "clamp",
             }),
@@ -193,7 +194,7 @@ export const ProblemScene: React.FC = () => {
           marginTop: 50,
           fontSize: 24,
           color: "#000",
-          opacity: interpolate(frame, [95, 115], [0, 1], {
+          opacity: interpolate(frame, [190, 230], [0, 1], {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",
           }),

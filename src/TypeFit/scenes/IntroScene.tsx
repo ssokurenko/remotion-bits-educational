@@ -1,7 +1,6 @@
 import React from "react";
 import {
   AbsoluteFill,
-  Easing,
   interpolate,
   spring,
   useCurrentFrame,
@@ -10,37 +9,27 @@ import {
 import { AnimatedText } from "remotion-bits";
 import { COLORS, FONT_MONO, FONT_SANS } from "../theme";
 import { TypeFitLogo } from "../components/Logo";
+import { GeminiBadge } from "../components/GeminiBadge";
 
 export const IntroScene: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
   const logoSpring = spring({
-    frame: frame - 10,
+    frame: frame - 20,
     fps,
     config: { damping: 18, stiffness: 110, mass: 0.7 },
   });
 
   const logoScale = interpolate(logoSpring, [0, 1], [0.5, 1]);
-  const logoOpacity = interpolate(frame, [0, 25], [0, 1], {
+  const logoOpacity = interpolate(frame, [0, 50], [0, 1], {
     extrapolateRight: "clamp",
   });
 
-  const subtitleStart = 38;
+  const subtitleStart = 120;
+  const badgeStart = 180;
 
-  const badgeOpacity = interpolate(frame, [90, 115], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-  const badgeY = interpolate(frame, [90, 115], [20, 0], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
-
-  const cursorOn = Math.floor(frame / 14) % 2 === 0;
-
-  const exit = interpolate(frame, [135, 150], [1, 0], {
+  const exit = interpolate(frame, [450, 480], [1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -56,31 +45,16 @@ export const IntroScene: React.FC = () => {
     >
       <div
         style={{
-          opacity: badgeOpacity,
-          transform: `translateY(${badgeY}px)`,
-          marginBottom: 28,
-          padding: "10px 22px",
-          borderRadius: 999,
-          background: `linear-gradient(135deg, ${COLORS.accent}33, ${COLORS.cyan}22)`,
-          border: `1px solid ${COLORS.cardBorderStrong}`,
+          position: "absolute",
+          top: 140,
+          left: 0,
+          right: 0,
           display: "flex",
-          alignItems: "center",
-          gap: 12,
-          fontSize: 22,
-          color: "#000",
-          fontWeight: 500,
+          justifyContent: "center",
+          pointerEvents: "none",
         }}
       >
-        <span
-          style={{
-            width: 10,
-            height: 10,
-            borderRadius: "50%",
-            background: COLORS.success,
-            boxShadow: `0 0 14px ${COLORS.success}`,
-          }}
-        />
-        Powered by Google Gemini AI
+        {frame >= badgeStart && <GeminiBadge startFrame={badgeStart} />}
       </div>
 
       <div
@@ -90,7 +64,7 @@ export const IntroScene: React.FC = () => {
           marginBottom: 48,
         }}
       >
-        <TypeFitLogo size={150} cursorOn={cursorOn} />
+        <TypeFitLogo size={150} />
       </div>
 
       {frame >= subtitleStart && (
@@ -111,9 +85,9 @@ export const IntroScene: React.FC = () => {
               blur: [12, 0],
               opacity: [0, 1],
               split: "word",
-              splitStagger: 2,
+              splitStagger: 4,
               easing: "easeOutCubic",
-              frames: [0, 30],
+              frames: [0, 60],
             }}
             style={{
               fontFamily: FONT_SANS,
@@ -126,7 +100,7 @@ export const IntroScene: React.FC = () => {
         </div>
       )}
 
-      {frame >= subtitleStart + 18 && (
+      {frame >= subtitleStart + 36 && (
         <div
           style={{
             marginTop: 18,
@@ -141,9 +115,9 @@ export const IntroScene: React.FC = () => {
               y: [16, 0],
               opacity: [0, 1],
               split: "word",
-              splitStagger: 2,
+              splitStagger: 4,
               easing: "easeOutCubic",
-              frames: [0, 26],
+              frames: [0, 52],
             }}
             style={{
               fontFamily: FONT_MONO,

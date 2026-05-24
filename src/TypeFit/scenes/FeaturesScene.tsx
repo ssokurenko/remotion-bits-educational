@@ -99,7 +99,7 @@ const FEATURES: Feature[] = [
 export const FeaturesScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const exit = interpolate(frame, [135, 150], [1, 0], {
+  const exit = interpolate(frame, [270, 300], [1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -129,8 +129,8 @@ export const FeaturesScene: React.FC = () => {
             opacity: [0, 1],
             y: [12, 0],
             split: "word",
-            splitStagger: 2,
-            frames: [0, 18],
+            splitStagger: 4,
+            frames: [0, 36],
             easing: "easeOutCubic",
           }}
           style={{ fontFamily: FONT_SANS, color: "#000" }}
@@ -155,8 +155,8 @@ export const FeaturesScene: React.FC = () => {
             y: [22, 0],
             blur: [8, 0],
             split: "word",
-            splitStagger: 2,
-            frames: [6, 32],
+            splitStagger: 4,
+            frames: [12, 64],
             easing: "easeOutCubic",
           }}
           style={{
@@ -175,8 +175,8 @@ export const FeaturesScene: React.FC = () => {
             y: [40, 0],
             opacity: [0, 1],
             scale: [0.94, 1],
-            frames: [30, 70],
-            stagger: 6,
+            frames: [60, 140],
+            stagger: 12,
             staggerDirection: "forward",
             easing: "easeOutCubic",
           }}

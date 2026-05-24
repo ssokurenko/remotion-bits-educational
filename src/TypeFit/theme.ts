@@ -23,13 +23,14 @@ export const COLORS = {
 };
 
 export const SCENE_TIMINGS = {
-  intro: { start: 0, duration: 150 },
-  problem: { start: 150, duration: 150 },
-  meet: { start: 300, duration: 150 },
-  practice: { start: 450, duration: 210 },
-  learn: { start: 660, duration: 270 },
-  features: { start: 930, duration: 150 },
-  cta: { start: 1080, duration: 150 },
+  intro: { start: 0, duration: 480 },
+  problem: { start: 480, duration: 300 },
+  meet: { start: 780, duration: 300 },
+  practice: { start: 1080, duration: 420 },
+  learn: { start: 1500, duration: 540 },
+  features: { start: 2040, duration: 300 },
+  cta: { start: 2340, duration: 600 },
 } as const;
 
-export const TOTAL_FRAMES = 1230;
+export const TOTAL_FRAMES = 2940;
+export const AUDIO_FADE_FRAMES = 180;

@@ -1,5 +1,11 @@
 import React from "react";
-import { AbsoluteFill, Sequence } from "remotion";
+import {
+  AbsoluteFill,
+  Audio,
+  interpolate,
+  Sequence,
+  staticFile,
+} from "remotion";
 import { Background } from "./components/Background";
 import { CTAScene } from "./scenes/CTAScene";
 import { FeaturesScene } from "./scenes/FeaturesScene";
@@ -8,11 +14,27 @@ import { LearnScene } from "./scenes/LearnScene";
 import { MeetScene } from "./scenes/MeetScene";
 import { PracticeScene } from "./scenes/PracticeScene";
 import { ProblemScene } from "./scenes/ProblemScene";
-import { SCENE_TIMINGS } from "./theme";
+import { AUDIO_FADE_FRAMES, SCENE_TIMINGS, TOTAL_FRAMES } from "./theme";
 
 export const TypeFitVideo: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#06051a" }}>
+      <Audio
+        src={staticFile("soundtrack.mp3")}
+        volume={(f) =>
+          interpolate(
+            f,
+            [
+              0,
+              30,
+              TOTAL_FRAMES - AUDIO_FADE_FRAMES,
+              TOTAL_FRAMES,
+            ],
+            [0, 0.35, 0.35, 0],
+            { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+          )
+        }
+      />
       <Background />
 
       <Sequence

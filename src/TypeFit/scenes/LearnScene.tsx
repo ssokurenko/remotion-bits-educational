@@ -65,7 +65,7 @@ export const LearnScene: React.FC = () => {
   const frame = useCurrentFrame();
   const rect = useViewportRect();
 
-  const exit = interpolate(frame, [250, 270], [1, 0], {
+  const exit = interpolate(frame, [500, 540], [1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -74,8 +74,8 @@ export const LearnScene: React.FC = () => {
     <AbsoluteFill style={{ opacity: exit, fontFamily: FONT_SANS }}>
       <Scene3D
         perspective={1500}
-        transitionDuration={32}
-        stepDuration={28}
+        transitionDuration={64}
+        stepDuration={56}
         easing="easeInOutCubic"
       >
         <Step
@@ -156,8 +156,8 @@ const TitleCard: React.FC<{ rect: ReturnType<typeof useViewportRect> }> = ({
             opacity: [0, 1],
             y: [10, 0],
             split: "word",
-            splitStagger: 2,
-            frames: [0, 18],
+            splitStagger: 4,
+            frames: [0, 36],
             easing: "easeOutCubic",
           }}
           style={{ fontFamily: FONT_SANS, color: "#000" }}
@@ -181,8 +181,8 @@ const TitleCard: React.FC<{ rect: ReturnType<typeof useViewportRect> }> = ({
             y: [24, 0],
             blur: [10, 0],
             split: "word",
-            splitStagger: 2,
-            frames: [4, 30],
+            splitStagger: 4,
+            frames: [8, 60],
             easing: "easeOutCubic",
           }}
           style={{
@@ -331,8 +331,8 @@ const OutroCard: React.FC<{ rect: ReturnType<typeof useViewportRect> }> = ({
   rect,
 }) => {
   const frame = useCurrentFrame();
-  const local = frame - 230;
-  const scale = interpolate(local, [0, 25], [0.92, 1], {
+  const local = frame - 460;
+  const scale = interpolate(local, [0, 50], [0.92, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),

@@ -41,41 +41,39 @@ export const CTAScene: React.FC = () => {
   const rect = useViewportRect();
 
   const logoSpring = spring({
-    frame: frame - 5,
+    frame: frame - 10,
     fps,
     config: { damping: 16, stiffness: 100, mass: 0.6 },
   });
   const logoScale = interpolate(logoSpring, [0, 1], [0.6, 1]);
-  const logoOpacity = interpolate(frame, [0, 18], [0, 1], {
+  const logoOpacity = interpolate(frame, [0, 36], [0, 1], {
     extrapolateRight: "clamp",
   });
 
-  const buttonStart = 60;
+  const buttonStart = 120;
   const buttonSpring = spring({
     frame: frame - buttonStart,
     fps,
     config: { damping: 14, stiffness: 130 },
   });
   const buttonScale = interpolate(buttonSpring, [0, 1], [0.85, 1]);
-  const buttonOpacity = interpolate(frame, [buttonStart, buttonStart + 15], [0, 1], {
+  const buttonOpacity = interpolate(frame, [buttonStart, buttonStart + 30], [0, 1], {
     extrapolateRight: "clamp",
     extrapolateLeft: "clamp",
   });
 
-  const buttonPulse = 1 + Math.sin((frame - buttonStart) * 0.15) * 0.02;
-  const arrowShift = Math.sin((frame - buttonStart) * 0.18) * 6;
+  const buttonPulse = 1 + Math.sin((frame - buttonStart) * 0.075) * 0.02;
+  const arrowShift = Math.sin((frame - buttonStart) * 0.09) * 6;
 
-  const urlOpacity = interpolate(frame, [85, 105], [0, 1], {
+  const urlOpacity = interpolate(frame, [170, 210], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const urlY = interpolate(frame, [85, 105], [12, 0], {
+  const urlY = interpolate(frame, [170, 210], [12, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
-
-  const cursorOn = Math.floor(frame / 12) % 2 === 0;
 
   return (
     <AbsoluteFill
@@ -88,16 +86,16 @@ export const CTAScene: React.FC = () => {
       <Sequence from={0}>
         <Particles>
           <Spawner
-            rate={1.2}
+            rate={0.6}
             position={resolvePoint(rect, { x: "center", y: "110%" })}
             area={{ width: rect.width, height: 0 }}
             velocity={{
               x: 0,
-              y: -rect.height * 0.012,
-              varianceX: rect.width * 0.003,
-              varianceY: rect.height * 0.005,
+              y: -rect.height * 0.006,
+              varianceX: rect.width * 0.0015,
+              varianceY: rect.height * 0.0025,
             }}
-            lifespan={180}
+            lifespan={360}
             max={80}
           >
             <div
@@ -139,7 +137,7 @@ export const CTAScene: React.FC = () => {
           marginBottom: 30,
         }}
       >
-        <TypeFitLogo size={120} cursorOn={cursorOn} />
+        <TypeFitLogo size={120} />
       </div>
 
       <div
@@ -159,8 +157,8 @@ export const CTAScene: React.FC = () => {
             y: [30, 0],
             blur: [10, 0],
             split: "word",
-            splitStagger: 2,
-            frames: [20, 50],
+            splitStagger: 4,
+            frames: [40, 100],
             easing: "easeOutCubic",
           }}
           style={{

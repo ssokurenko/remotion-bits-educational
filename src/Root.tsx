@@ -10,7 +10,7 @@ export const RemotionRoot: React.FC = () => {
         id="TypeFit"
         component={TypeFitVideo}
         durationInFrames={TOTAL_FRAMES}
-        fps={30}
+        fps={60}
         width={1920}
         height={1080}
       />

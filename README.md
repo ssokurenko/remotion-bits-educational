@@ -3,7 +3,7 @@
 A short, polished promo video for [type.fit](https://type.fit/), an AI-powered touch-typing platform.
 The video is generated programmatically with [Remotion](https://www.remotion.dev/) and assembled from animation primitives provided by [`remotion-bits`](https://www.npmjs.com/package/remotion-bits).
 
-The piece runs **~41 seconds at 1920×1080 / 30 fps** and walks viewers through the product's value proposition across seven scenes:
+The video runs at **1920×1080 / 60 fps**, scored by a soundtrack that fades out under the final call-to-action, and walks viewers through the product's value proposition across seven scenes:
 
 | # | Scene             | What happens                                                                                       |
 |---|-------------------|----------------------------------------------------------------------------------------------------|
@@ -56,16 +56,21 @@ src/
 All scene timings live in `src/TypeFit/theme.ts` as `SCENE_TIMINGS`:
 
 ```ts
-intro:    { start:    0, duration: 150 }   // 0   – 5.0s
-problem:  { start:  150, duration: 150 }   // 5.0 – 10.0s
-meet:     { start:  300, duration: 150 }   // 10  – 15.0s
-practice: { start:  450, duration: 210 }   // 15  – 22.0s
-learn:    { start:  660, duration: 270 }   // 22  – 31.0s
-features: { start:  930, duration: 150 }   // 31  – 36.0s
-cta:      { start: 1080, duration: 150 }   // 36  – 41.0s
+// at 60 fps
+intro:    { start:    0, duration: 480 }   // 0   – 8.0s
+problem:  { start:  480, duration: 300 }   // 8.0 – 13.0s
+meet:     { start:  780, duration: 300 }   // 13  – 18.0s
+practice: { start: 1080, duration: 420 }   // 18  – 25.0s
+learn:    { start: 1500, duration: 540 }   // 25  – 34.0s
+features: { start: 2040, duration: 300 }   // 34  – 39.0s
+cta:      { start: 2340, duration: 600 }   // 39  – 49.0s
 ```
 
-`TOTAL_FRAMES = 1230`. The single composition `TypeFit` is registered in `src/Root.tsx`.
+`TOTAL_FRAMES = 2940`. The single composition `TypeFit` is registered in `src/Root.tsx`.
+
+### Audio
+
+The score lives at `public/soundtrack.mp3` and is mounted inside `TypeFitVideo.tsx` via Remotion's `<Audio>` component. A `volume={(f) => interpolate(...)}` curve gives a quick fade-in over the first half-second and a longer fade-out over the last `AUDIO_FADE_FRAMES = 180` frames (3 s) so the music tails under the CTA. Swap the file at the same path to change the track; no other code changes required.
 
 ## Getting started
 
