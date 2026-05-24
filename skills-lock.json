@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "remotion-bits": {
+      "source": "av/remotion-bits",
+      "sourceType": "github",
+      "skillPath": "skills/remotion-bits/SKILL.md",
+      "computedHash": "a2da1e08921370e6d98438f0f9a1ce00d0b7860b7264ed1b856239eb5c75c941"
+    }
+  }
+}
