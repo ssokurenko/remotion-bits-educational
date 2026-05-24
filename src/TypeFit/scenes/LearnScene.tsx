@@ -5,8 +5,9 @@ import {
   interpolate,
   useCurrentFrame,
 } from "remotion";
-import { AnimatedText, Scene3D, Step, useViewportRect } from "remotion-bits";
+import { AnimatedText, Scene3D, Step } from "remotion-bits";
 import { COLORS, FONT_MONO, FONT_SANS } from "../theme";
+import { useStageRect } from "../hooks/useStageRect";
 
 interface Course {
   title: string;
@@ -63,7 +64,7 @@ const COURSES: Course[] = [
 
 export const LearnScene: React.FC = () => {
   const frame = useCurrentFrame();
-  const rect = useViewportRect();
+  const rect = useStageRect();
 
   const exit = interpolate(frame, [500, 540], [1, 0], {
     extrapolateLeft: "clamp",
@@ -127,7 +128,7 @@ export const LearnScene: React.FC = () => {
   );
 };
 
-const TitleCard: React.FC<{ rect: ReturnType<typeof useViewportRect> }> = ({
+const TitleCard: React.FC<{ rect: ReturnType<typeof useStageRect> }> = ({
   rect,
 }) => {
   return (
@@ -201,7 +202,7 @@ const TitleCard: React.FC<{ rect: ReturnType<typeof useViewportRect> }> = ({
 const CourseCard: React.FC<{
   course: Course;
   index: number;
-  rect: ReturnType<typeof useViewportRect>;
+  rect: ReturnType<typeof useStageRect>;
 }> = ({ course, index, rect }) => {
   const width = rect.vmin * 60;
   const height = rect.vmin * 40;
@@ -327,7 +328,7 @@ const CourseCard: React.FC<{
   );
 };
 
-const OutroCard: React.FC<{ rect: ReturnType<typeof useViewportRect> }> = ({
+const OutroCard: React.FC<{ rect: ReturnType<typeof useStageRect> }> = ({
   rect,
 }) => {
   const frame = useCurrentFrame();

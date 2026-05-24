@@ -3,7 +3,7 @@
 A short, polished promo video for [type.fit](https://type.fit/), an AI-powered touch-typing platform.
 The video is generated programmatically with [Remotion](https://www.remotion.dev/) and assembled from animation primitives provided by [`remotion-bits`](https://www.npmjs.com/package/remotion-bits).
 
-The video runs at **1920×1080 / 60 fps**, scored by a soundtrack that fades out under the final call-to-action, and walks viewers through the product's value proposition across seven scenes:
+The video runs at **3840×2160 (4K UHD) / 60 fps**, scored by a soundtrack that fades out under the final call-to-action, and walks viewers through the product's value proposition across seven scenes:
 
 | # | Scene             | What happens                                                                                       |
 |---|-------------------|----------------------------------------------------------------------------------------------------|
@@ -33,7 +33,7 @@ src/
 ├── index.css                      # Tailwind import + Google Fonts + CSS vars
 ├── Root.tsx                       # Compositions registry (TypeFit only)
 └── TypeFit/
-    ├── TypeFitVideo.tsx           # Top-level composition; sequences scenes
+    ├── TypeFitVideo.tsx           # Top-level composition; wraps a 1920×1080 stage scaled 2× to 4K
     ├── theme.ts                   # COLORS, fonts, SCENE_TIMINGS, TOTAL_FRAMES
     ├── components/
     │   ├── Background.tsx         # Apple-palette GradientTransition + vignette
@@ -101,23 +101,26 @@ This opens the visual editor at `http://localhost:3000`. Pick the **TypeFit** co
 ### Render a still frame (fast sanity check)
 
 ```bash
-npx remotion still TypeFit out/frame.jpg --scale=0.4 --frame=560
+npx remotion still TypeFit out/frame.jpg --scale=0.2 --frame=560
 ```
 
 - `--frame` is 0-based; e.g. `560` ≈ middle of the practice scene.
-- `--scale=0.4` renders a smaller preview (1920×1080 × 0.4 = 768×432) — handy when iterating on layout.
+- `--scale=0.2` renders a smaller preview (3840×2160 × 0.2 = 768×432) — handy when iterating on layout. Drop to `--scale=1` for a true-4K still.
 
 ### Render the full video
 
 ```bash
-# Default (H.264 mp4 at 1920×1080/30fps)
+# Default (H.264 mp4 at 3840×2160 / 60 fps)
 npx remotion render TypeFit out/typefit.mp4
 
-# 1080p ProRes for editing pipelines
+# 4K ProRes for editing pipelines
 npx remotion render TypeFit out/typefit.mov --codec=prores --prores-profile=4444
 
 # WebM/VP9 for the web
 npx remotion render TypeFit out/typefit.webm --codec=vp9
+
+# Need a 1080p deliverable? Render at half resolution.
+npx remotion render TypeFit out/typefit-1080p.mp4 --scale=0.5
 ```
 
 The bundle step takes ~10–15 s on a modern machine; the actual frame render time depends mostly on the number of `Particles` and `Scene3D` steps in view.

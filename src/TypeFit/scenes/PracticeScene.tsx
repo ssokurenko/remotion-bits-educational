@@ -12,16 +12,16 @@ import {
   Particles,
   resolvePoint,
   Spawner,
-  useViewportRect,
 } from "remotion-bits";
 import { COLORS, FONT_MONO, FONT_SANS } from "../theme";
+import { useStageRect } from "../hooks/useStageRect";
 
 const SAMPLE_QUOTE =
   "Practice doesn't make perfect. Practice makes permanent.";
 
 export const PracticeScene: React.FC = () => {
   const frame = useCurrentFrame();
-  const rect = useViewportRect();
+  const rect = useStageRect();
 
   const headerOpacity = interpolate(frame, [0, 36], [0, 1], {
     extrapolateRight: "clamp",

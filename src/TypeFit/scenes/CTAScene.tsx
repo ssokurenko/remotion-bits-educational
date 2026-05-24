@@ -14,9 +14,9 @@ import {
   Particles,
   resolvePoint,
   Spawner,
-  useViewportRect,
 } from "remotion-bits";
 import { COLORS, FONT_MONO, FONT_SANS } from "../theme";
+import { useStageRect } from "../hooks/useStageRect";
 import { TypeFitLogo } from "../components/Logo";
 
 const KeyboardIcon: React.FC<{ size: number }> = ({ size }) => (
@@ -38,7 +38,7 @@ const KeyboardIcon: React.FC<{ size: number }> = ({ size }) => (
 export const CTAScene: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const rect = useViewportRect();
+  const rect = useStageRect();
 
   const logoSpring = spring({
     frame: frame - 10,
